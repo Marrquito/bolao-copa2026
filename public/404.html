@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Bolão Copa 2026</title>
+    <script>
+      // GitHub Pages SPA redirect trick
+      // Encodes the path into a query string and redirects to index.html
+      var l = window.location
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 2).join('/') +
+        '/?p=' + encodeURIComponent(l.pathname.slice(1) + l.search) +
+        '&h=' + encodeURIComponent(l.hash.slice(1))
+      )
+    </script>
+  </head>
+  <body></body>
+</html>

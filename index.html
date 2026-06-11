@@ -7,6 +7,17 @@
     <meta name="description" content="Bolão da Copa do Mundo FIFA 2026 - Faça seus palpites e dispute com seus amigos!" />
     <meta name="theme-color" content="#0f172a" />
     <title>Bolão Copa 2026 ⚽</title>
+    <script>
+      // GitHub Pages SPA: restore path from 404 redirect
+      ;(function() {
+        var q = window.location.search
+        if (q && q.startsWith('?p=')) {
+          var decoded = decodeURIComponent(q.slice(3).split('&h=')[0])
+          var hash = q.includes('&h=') ? '#' + decodeURIComponent(q.split('&h=')[1]) : ''
+          window.history.replaceState(null, null, '/' + decoded + hash)
+        }
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>
