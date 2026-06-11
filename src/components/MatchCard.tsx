@@ -57,16 +57,20 @@ export default function MatchCard({ match, onPredictionSaved }: MatchCardProps) 
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [saved, setSaved] = useState(false)
+  // Rastreia localmente se já existe palpite (evita refetch da lista toda)
+  const [hasPredictionLocal, setHasPredictionLocal] = useState(!!match.user_prediction)
+  const [savedHome, setSavedHome] = useState(match.user_prediction?.home_score ?? 0)
+  const [savedAway, setSavedAway] = useState(match.user_prediction?.away_score ?? 0)
 
   const now = new Date()
   const matchDate = new Date(match.match_date)
   const isTimeLocked = matchDate <= now
   const isLocked = match.status === 'finished' || isTimeLocked
   const isTBD = match.home_team?.name === 'A Definir' || match.away_team?.name === 'A Definir'
-  const hasPrediction = !!match.user_prediction
+  const hasPrediction = hasPredictionLocal
   const predictionChanged =
-    homeScore !== (match.user_prediction?.home_score ?? 0) ||
-    awayScore !== (match.user_prediction?.away_score ?? 0)
+    homeScore !== savedHome ||
+    awayScore !== savedAway
 
   const handleSave = async () => {
     if (!user || isLocked) return
@@ -88,6 +92,9 @@ export default function MatchCard({ match, onPredictionSaved }: MatchCardProps) 
         if (error) throw error
       }
       setSaved(true)
+      setHasPredictionLocal(true)
+      setSavedHome(homeScore)
+      setSavedAway(awayScore)
       setTimeout(() => setSaved(false), 2000)
       onPredictionSaved?.()
     } catch (err: unknown) {

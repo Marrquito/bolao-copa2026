@@ -16,7 +16,7 @@ const STATUSES = [
 ]
 
 export default function MatchesPage() {
-  const { user } = useAuth()
+  const { user, refreshProfile } = useAuth()
   const { t, i18n } = useTranslation()
   const locale = i18n.language.startsWith('pt') ? 'pt-BR' : 'en-US'
   const [matches, setMatches] = useState<MatchWithPrediction[]>([])
@@ -158,7 +158,7 @@ export default function MatchesPage() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {dayMatches.map(match => (
-                <MatchCard key={match.id} match={match} onPredictionSaved={fetchMatches} />
+                <MatchCard key={match.id} match={match} onPredictionSaved={refreshProfile} />
               ))}
             </div>
           </div>

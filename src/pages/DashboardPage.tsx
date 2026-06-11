@@ -78,7 +78,6 @@ export default function DashboardPage() {
 
   const handlePredictionSaved = () => {
     refreshProfile()
-    fetchData()
   }
 
   if (loading) {
